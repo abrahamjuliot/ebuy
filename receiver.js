@@ -220,7 +220,7 @@ docReady(function(){
 }) // end docReady
 
 // USING Custom Javascript for Websites
-let docLoaded = fn => 
+const docLoaded = fn => 
 	document.readyState !== 'loading'?
         fn(): document.addEventListener('DOMContentLoaded', fn)
     
