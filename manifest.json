@@ -1,0 +1,16 @@
+{
+  "name": "Getting Started Example",
+  "version": "1.0",
+  "description": "UCR eBuy Receiver Extension",
+  "permissions": ["activeTab", "declarativeContent", "storage"],
+  "content_scripts": [
+    {
+      "matches": ["https://ebuy.ucr.edu/*"],
+      "css": ["style.css"],
+      "js": ["receiver.js"],
+      "all_frames": true
+    }
+  ],
+  "icons": { "48": "icon48.png"},
+  "manifest_version": 2
+}
