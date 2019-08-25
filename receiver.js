@@ -220,23 +220,20 @@ docReady(function(){
 }) // end docReady
 
 // USING Custom Javascript for Websites
-let docLoaded = function (fn) {
-        document.readyState !== 'loading'?
-        fn():
-        document.addEventListener('DOMContentLoaded', fn);
-    };
+let docLoaded = fn => 
+	document.readyState !== 'loading'?
+        fn(): document.addEventListener('DOMContentLoaded', fn)
+    
 
 if (window.location.href.indexOf('po_receive') > -1) {
-    docLoaded(function() {
-		const listenForPopUp = setInterval(function() {
-		    var closed = false;
-		    console.log('checking');
+    docLoaded(() => {
+		const listenForPopUp = setInterval(() => {
+		    let closed = false
 		    if (!closed && (window.location.href.indexOf('po_receive') > -1)) {
-		        closed = true;
-		        window.close();
-		        clearInterval(listenForPopUp);
-		        console.log('closing');
+		        closed = true
+		        window.close()
+		        clearInterval(listenForPopUp)
 		    }
-		}, 100);
-    });
+		}, 100)
+    })
 }
