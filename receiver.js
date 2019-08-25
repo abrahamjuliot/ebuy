@@ -1,4 +1,4 @@
-// 6 line JSX alternative
+// 6 line JSX alternative, patch(el, html`<new></new>`)
 const patch = (oldEl, newEl) => oldEl.parentNode.replaceChild(newEl, oldEl)
 const html = (stringSet,...expressionSet) => {
   const template = document.createElement('template')
@@ -13,6 +13,7 @@ const docReady = (fn) =>
 const queryAll = (x) => document.querySelectorAll(x)
 // url checker
 const hasTextInURL = (x, w = window) => (new RegExp(x, 'gi')).test(w.location.href)
+const textToNumber = (x) => parseFloat(x.substr(1).replace(/,/g, ''))
 
 const readyToPay = `
 	flight bank sub getaway stater pizza mission barnes 
@@ -47,7 +48,7 @@ const reviewing = `
 
 docReady(function(){
 	// presets
-	searchMode = false
+	const searchMode = false
 	const daysNew = 1
 	const daysAged = 60
 	const costlyPrice = 5000
@@ -57,7 +58,7 @@ docReady(function(){
 	let newPO = paidPO = agedPO = costlyPO = ghostedPO = reviewPO = readyPO = 0
 	
 	// column presets
-	const dateCol = 2
+    const dateCol = 2
 	const poNumberCol = 4
 	const vendorCol = 5
 	const descriptionCol = 6
@@ -77,15 +78,28 @@ docReady(function(){
 	const tablePayments = queryAll(tableCol(totalPaidCol))
 	
 	// table length
-	const len = tablePrices.length
+    const len = tablePrices.length
+    
+    // Establish Clipboard Notifications
+    // notify
+    const notify = ({setting, note}) => {
+        let notification
+        if (Notification.permission === 'granted') {
+            notification = new Notification(
+            'eBuy Receiver', { body: `...copied to clipboard`, icon: 'icon48.png' }
+            )
+            setTimeout(notification.close.bind(notification), 7000)
+        }
+    }
+    
 	
 	// row conditional formatting
 	for (let i = 0; i < len; i++) {
 		const thisRow = rows[i+1]
 		const poPriceEl = tablePrices[i]
 		const poPaidEl = tablePayments[i]
-		const amtPrice = parseFloat(poPriceEl.innerHTML.substr(1).replace(/,/g, ''))
-		const amtPaid = parseFloat(poPaidEl.innerHTML.substr(1).replace(/,/g, ''))
+		const amtPrice = textToNumber(poPriceEl.innerHTML)
+		const amtPaid = textToNumber(poPaidEl.innerHTML)
 		
 		const poVendor = tableVendors[i].innerHTML.toLowerCase()
 		const poDescription = tableDescriptions[i].innerHTML.toLowerCase()
@@ -137,22 +151,58 @@ docReady(function(){
 	const dataTable = document.querySelector('.data-table')
 	const poNumberInputEl = document.querySelector('.section-box input[name="PONumber"]')
 	const searchInputEl = document.querySelector('.section-box input[value="Search"] ')
-	
+    const poDigits = (x) => (x.match(/\d{8}/g) || [''])[0]
+    
 	dataTable && dataTable.addEventListener('click', event => {
 		const el = event.target
 		if (el.classList.contains('btn-po-number')) {
 			const text = el.innerHTML
-			const digits = (text.match(/\d{8}/g) || [''])[0]
+			const digits = poDigits(text)
 			poNumberInputEl.value = digits
-			
-			
 			poNumberInputEl.select() // select text
-			document.execCommand('copy') // copy text
-			
+            document.execCommand('copy') // copy text
+            Notification.requestPermission(notify({setting: 0, note: 1}))
 			searchMode && searchInputEl.click()
 		}
-	})
-	
+    })
+    
+    dataTable && dataTable.addEventListener('dblclick', event => {
+		const el = event.target
+		if (el.classList.contains('btn-po-number')) {
+            const row = el.parentNode
+            const date = row.querySelector('td:nth-child(2)').innerHTML
+            const name = row.querySelector('td:nth-child(3)').innerHTML.split(' ')[0]
+            const poNumber = row.querySelector('td:nth-child(4)').innerHTML
+            const digits = poDigits(poNumber)
+            const vendor = row.querySelector('td:nth-child(5)').innerHTML
+            const description = row.querySelector('td:nth-child(6)').innerHTML
+            const poTotal = textToNumber(row.querySelector('td:nth-child(8)').innerHTML)
+            const totalPaid = textToNumber(row.querySelector('td:nth-child(9)').innerHTML)
+            const textEl = document.createElement('textarea')
+            textEl.id = 'poEmailTemplate'
+            document.body.appendChild(textEl)
+            
+            const poEmailTemplate = document.getElementById('poEmailTemplate')
+            poEmailTemplate.value = `           
+Status of PO ${digits}
+Hi ${name}, are all items in this PO received?
+
+PO: ${poNumber}
+PO Date: ${date}
+Vendor: ${vendor}
+Description: ${description}
+Total: $${poTotal}
+Total Paid (by Accounting): $${totalPaid?totalPaid:0}
+
+Abraham
+`
+            poEmailTemplate.select() // select text
+            document.execCommand('copy') // copy text
+            document.getElementById('poEmailTemplate').outerHTML = '' // destroy element
+            Notification.requestPermission(notify({setting: 0, note: 1}))	
+		}
+    })
+    
 	// create notification banner
 	if (hasTextInURL('po_search')) {
 		const contentEl = document.querySelector('.content')
