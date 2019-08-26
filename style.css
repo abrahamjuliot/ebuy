@@ -136,6 +136,10 @@ div.content .data-table th a, div.content .data-table th a:visited, .data-table 
     text-decoration: none !important;
 }
 
+.content .btn-po-number {
+  padding: 4px 7px !important;  
+}
+
 .content .btn-po-number, input[type=submit] {
     color: #ffffff !important;
     cursor: pointer !important;
@@ -144,7 +148,6 @@ div.content .data-table th a, div.content .data-table th a:visited, .data-table 
     border: none !important;
     border-radius: 2px !important;
     margin: 5px !important;
-    padding: 4px 7px !important;
     box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.06), 0 1px 1px 0 rgba(0, 0, 0, 0.16);
     text-decoration: none !important;
     transition: color 0.3s ease 0s, background 0.3s ease 0s !important;
@@ -155,6 +158,22 @@ input[type=submit]:hover,
 input[type=submit]:focus,
 .btn-po-number:focus {
     background: #8aa5dca8 !important
+}
+
+input[type=submit] {
+    padding: 15px 20px !important;
+    font-weight: bold !important;
+}
+
+input[value="Authorize Full Payment"] {
+    background: rgb(255, 255, 255) !important;
+    color: rgb(138, 165, 220) !important;
+}
+
+input[value="Authorize Full Payment"]:hover,
+input[value="Authorize Full Payment"]:focus{
+    background: rgba(138, 165, 220, 0.2) !important;
+    color: rgb(138, 165, 220) !important;
 }
 
 div.content a, a:visited {
