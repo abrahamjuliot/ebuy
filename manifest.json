@@ -1,13 +1,13 @@
 {
-  "name": "Getting Started Example",
+  "name": "eBuy",
   "version": "1.0",
   "description": "UCR eBuy Receiver Extension",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "content_scripts": [
     {
       "matches": ["https://ebuy.ucr.edu/*"],
-      "css": ["style.css"],
-      "js": ["receiver.js"],
+      "css": ["https://abrahamjuliot.github.io/ebuy/style.css"],
+      "js": ["https://abrahamjuliot.github.io/ebuy/receiver.js"],
       "all_frames": true
     }
   ],
