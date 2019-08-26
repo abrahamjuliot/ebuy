@@ -80,9 +80,7 @@ body {
 .data-table tr:nth-child(odd) {
     background: inherit !important;
 }
-.highlight-costly {
-    font-size: 1.2em !important;
-}
+
 .highlight-paid {
     background: rgba(73, 206, 178, 0.84) !important;
     color: white !important;
@@ -243,7 +241,7 @@ td {
 }
 tr[bgcolor="#99CCCC"] {
     background: #fff !important;
-    font-size: .8em !important;
+    font-size: .8rem !important;
 }
 tr[bgcolor="#99CCCC"] th {
     font-weight: normal !important;
