@@ -135,7 +135,29 @@ div.content .data-table th a, div.content .data-table th a:visited, .data-table 
     color: rgba(51, 102, 204, 0.73) !important;
     text-decoration: none !important;
 }
-div.content a, a:visited, input[type=submit], .btn-po-number {
+
+.content .btn-po-number, input[type=submit] {
+    color: #ffffff !important;
+    cursor: pointer !important;
+    display: inline-block !important;
+    background: #8aa5dc !important;
+    border: none !important;
+    border-radius: 2px !important;
+    margin: 5px !important;
+    padding: 4px 7px !important;
+    box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.06), 0 1px 1px 0 rgba(0, 0, 0, 0.16);
+    text-decoration: none !important;
+    transition: color 0.3s ease 0s, background 0.3s ease 0s !important;
+}
+
+input[type=submit]:hover,
+.btn-po-number:hover,
+input[type=submit]:focus,
+.btn-po-number:focus {
+    background: #8aa5dca8 !important
+}
+
+div.content a, a:visited {
     background: #fff !important;
     border: 1px solid #739ae8 !important;
     border-radius: 2px !important;
@@ -147,10 +169,12 @@ div.content a, a:visited, input[type=submit], .btn-po-number {
     text-decoration: none !important;
     transition: color .3s ease, background .3s ease !important;
 }
-div.content a:hover, input[type=submit]:hover, .btn-po-number:hover {
+
+div.content a:hover, div.content a:focus {
     background: rgba(115, 154, 232, 0.65) !important;
     color: #fff !important;
 }
+
 form[action^="po_receive"] {
     border: 1px solid #eee !important;
     margin: 20px auto !important;
