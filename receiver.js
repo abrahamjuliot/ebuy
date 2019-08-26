@@ -1,3 +1,4 @@
+!function(){
 // 6 line JSX alternative, patch(el, html`<new></new>`)
 const patch = (oldEl, newEl) => oldEl.parentNode.replaceChild(newEl, oldEl)
 const html = (stringSet,...expressionSet) => {
@@ -82,11 +83,14 @@ docReady(function(){
     
     // Establish Clipboard Notifications
     // notify
-    const notify = ({setting, note}) => {
+    const notify = ({poNumber, name, poTotal}) => {
         let notification
         if (Notification.permission === 'granted') {
             notification = new Notification(
-            'eBuy Receiver', { body: `...copied to clipboard`, icon: 'icon48.png' }
+            'eBuy Receiver', {
+                body: `Copied: ${poNumber}, $${poTotal}, ${name}`,
+                icon: 'icon48.png'
+            }
             )
             setTimeout(notification.close.bind(notification), 7000)
         }
@@ -161,7 +165,7 @@ docReady(function(){
 			poNumberInputEl.value = digits
 			poNumberInputEl.select() // select text
             document.execCommand('copy') // copy text
-            Notification.requestPermission(notify({setting: 0, note: 1}))
+            
 			searchMode && searchInputEl.click()
 		}
     })
@@ -199,7 +203,7 @@ Abraham
             poEmailTemplate.select() // select text
             document.execCommand('copy') // copy text
             document.getElementById('poEmailTemplate').outerHTML = '' // destroy element
-            Notification.requestPermission(notify({setting: 0, note: 1}))	
+            Notification.requestPermission(notify({poNumber, name, poTotal}))	
 		}
     })
     
@@ -287,3 +291,4 @@ if (window.location.href.indexOf('po_receive') > -1) {
 		}, 100)
     })
 }
+}()//end IIF closure
