@@ -140,6 +140,11 @@ div.content .data-table th a, div.content .data-table th a:visited, .data-table 
   padding: 4px 7px !important;  
 }
 
+div.content a, a:visited,
+.content .btn-po-number, input[type=submit] {
+    box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.06), 0 1px 1px 0 rgba(0, 0, 0, 0.16);
+}
+
 .content .btn-po-number, input[type=submit] {
     color: #ffffff !important;
     cursor: pointer !important;
@@ -148,8 +153,7 @@ div.content .data-table th a, div.content .data-table th a:visited, .data-table 
     border: none !important;
     border-radius: 2px !important;
     margin: 5px !important;
-    box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.06), 0 1px 1px 0 rgba(0, 0, 0, 0.16);
-    text-decoration: none !important;
+    
     transition: color 0.3s ease 0s, background 0.3s ease 0s !important;
 }
 
