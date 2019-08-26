@@ -6,8 +6,8 @@
   "content_scripts": [
     {
       "matches": ["https://ebuy.ucr.edu/*"],
-      "css": ["https://abrahamjuliot.github.io/ebuy/style.css"],
-      "js": ["https://abrahamjuliot.github.io/ebuy/receiver.js"],
+      "css": ["style.css"],
+      "js": ["receiver.js"],
       "all_frames": true
     }
   ],
