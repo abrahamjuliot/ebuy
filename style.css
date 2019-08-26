@@ -75,7 +75,7 @@ body {
     padding-right: 0 !important;
 }
 .data-table tr {
-    font-size: .8em !important;
+    font-size: .8rem !important;
 }
 .data-table tr:nth-child(odd) {
     background: inherit !important;
