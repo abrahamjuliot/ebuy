@@ -165,33 +165,27 @@ input[type=submit] {
     font-weight: bold !important;
 }
 
+div.content a, a:visited,
 input[value="Authorize Full Payment"] {
     background: rgb(255, 255, 255) !important;
     color: rgb(138, 165, 220) !important;
 }
 
+div.content a:hover, div.content a:focus,
 input[value="Authorize Full Payment"]:hover,
-input[value="Authorize Full Payment"]:focus{
+input[value="Authorize Full Payment"]:focus {
     background: rgba(138, 165, 220, 0.2) !important;
     color: rgb(138, 165, 220) !important;
 }
 
 div.content a, a:visited {
-    background: #fff !important;
-    border: 1px solid #739ae8 !important;
     border-radius: 2px !important;
-    color: #739ae8 !important;
     cursor: pointer !important;
     display: inline-block !important;
-    margin: 0 0 5px !important;
-    padding: 4px !important;
+    margin: 5px !important;
+    padding: 4px 7px !important;
     text-decoration: none !important;
     transition: color .3s ease, background .3s ease !important;
-}
-
-div.content a:hover, div.content a:focus {
-    background: rgba(115, 154, 232, 0.65) !important;
-    color: #fff !important;
 }
 
 form[action^="po_receive"] {
