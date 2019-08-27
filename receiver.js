@@ -129,8 +129,10 @@ docReady(function(){
 			str.replace(/\t|\n/gm, ' ').split(' ').filter(x => x) 
 		const listToRegExp = (list) => (new RegExp(templateToList(list).join('|'), 'gi'))
 		
-		if (listToRegExp(readyToPay).test(poVendor)
-			|| listToRegExp(readyToPay).test(poDescription) || amtPrice === 0) {
+		// if not ghosted and ready to pay or zero price
+		if (!/O[WV]|NU/.test(poNumber) && (listToRegExp(readyToPay).test(poVendor)
+			|| listToRegExp(readyToPay).test(poDescription) 
+			|| amtPrice === 0)) {
 			thisRow.classList.add('ready'); readyPO++
 		}
 		
