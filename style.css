@@ -151,7 +151,6 @@ div.content a, a:visited,
     border: none !important;
     border-radius: 2px !important;
     margin: 5px !important;
-    
     transition: color 0.3s ease 0s, background 0.3s ease 0s !important;
 }
 
@@ -221,15 +220,22 @@ iframe[src*='ReceivePartial'] {
     min-height: 2000px !important;
 }
 input[name="file"] {
-    background: rgba(73, 206, 178, 0.05) !important;
-    border: 1px solid !important;
+    background: rgb(255, 255, 255) !important;
+    border: 1px solid #fff !important;
     border-radius: 2px !important;
     color: rgba(73, 206, 178, 0.84) !important;
     height: 100px !important;
     margin: 10px !important;
     padding: 3px !important;
     width: 90% !important;
+    transition: border 3s ease, background 3s ease !important;
 }
+input[name="file"].uploader {
+    background: rgba(73, 206, 178, 0.05) !important;
+    border: 1px solid !important;
+    transition: border 3s ease, background 3s ease !importan;
+}
+
 input[type="file"]::-webkit-file-upload-button {
     visibility: hidden !important;
 }

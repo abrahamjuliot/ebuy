@@ -8,6 +8,7 @@
       "matches": ["https://ebuy.ucr.edu/*"],
       "css": ["style.css"],
       "js": ["receiver.js"],
+      "match_about_blank": true,
       "all_frames": true
     }
   ],

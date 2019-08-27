@@ -241,10 +241,15 @@ Abraham
 				const form = doc.querySelector('form[action*="po_attachments"]')
 				const filenameInputEl = doc.querySelector('input[name="sDescr"]')
 				const chooseFileInputEl = doc.querySelector('input[name="file"]')
+				
+				// signal the uploader is ready
+				chooseFileInputEl.classList.add('uploader')
+				
+				// on change name the file and submit
 				chooseFileInputEl.onchange = () => {
 					const filenameText = chooseFileInputEl.value.split(/(\\|\/)/g).pop().split(".")[0]
 					filenameInputEl.value = filenameText // set filename input
-					form.submit() // auto submit the form
+					//form.submit() // auto submit the form
 				}
 			}
 		}
@@ -254,13 +259,15 @@ Abraham
 		const receiveEl = document.createElement('receive')
 		
 		document.body.appendChild(receiveEl)
-
+        
+        // declare ghost style for iframe (frame required to get ok to pay data)
+        const ghostStyle = `height:0;margin:0!important;padding:0!important;min-height:0!important;`
 		// then patch the dom
 		patch(
 			document.querySelector('receive'),
             html`
-                <iframe style="height:0;margin:0!important;padding:0!important;min-height:0!important;" src="https://ebuy.ucr.edu/ebuy/po_action.MarkPartiallyOKtoPay?nOrderID=${searchId}"></iframe>
-				<iframe src="https://ebuy.ucr.edu/ebuy/po_action.AttachDocument?nOrderID=${searchId}"></iframe>
+                <iframe src="https://ebuy.ucr.edu/ebuy/po_action.AttachDocument?nOrderID=${searchId}"></iframe>
+                <iframe style="${ghostStyle}" src="https://ebuy.ucr.edu/ebuy/po_action.MarkPartiallyOKtoPay?nOrderID=${searchId}"></iframe>
 				<iframe src="https://ebuy.ucr.edu/ebuy/po_view.ListAttachments?nOrderID=${searchId}"></iframe>
 				<iframe src="https://ebuy.ucr.edu/ebuy/po_receive.DisplayReceivePartial?nOrderID=${searchId}"></iframe>
 		  `
@@ -269,7 +276,7 @@ Abraham
 		// then listen for form input on upload iframe
 		setTimeout(() => {
 			frames[0].window.eval(listenOnFormInput(frames[0].window))
-		}, 1000)
+		}, 5000)
 	} 
 }) // end docReady
 
