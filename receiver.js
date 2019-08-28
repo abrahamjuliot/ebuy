@@ -119,17 +119,20 @@ docReady(function(){
 		const poDate = tableDates[i].innerHTML
 
 		tablePOs[i].classList.add('btn-po-number')
+
+		// ghost POs
+		const ghosted = (x) => /O[WV]|NU/.test(x)
+
+		if (ghosted(poNumber)) {
+			thisRow.classList.add('ghost'); ghostedPO++
+		}
 		
-		if (amtPrice >= costlyPrice) {
+		// costly PO
+		if (!ghosted(poNumber) && amtPrice >= costlyPrice) {
 			poPriceEl.classList.add('highlight-costly'); costlyPO++
 		} else if (amtPaid >= (amtPrice*percentRequiredTillPaid)) {
 			poPriceEl.classList.add('highlight-paid')
 			poPaidEl.classList.add('highlight-paid'); paidPO++
-		}
-		
-		// ghost POs
-		if (/O[WV]|NU/.test(poNumber)) {
-			thisRow.classList.add('ghost'); ghostedPO++
 		}
 		
 		// ready to receive and in review POs
@@ -138,7 +141,7 @@ docReady(function(){
 		const listToRegExp = (list) => (new RegExp(templateToList(list).join('|'), 'gi'))
 		
 		// if not ghosted and ready to pay or zero price
-		if (!/O[WV]|NU/.test(poNumber) && (listToRegExp(readyToPay).test(poVendor)
+		if (!ghosted(poNumber) && (listToRegExp(readyToPay).test(poVendor)
 			|| listToRegExp(readyToPay).test(poDescription) 
 			|| amtPrice === 0)) {
 			thisRow.classList.add('ready'); readyPO++
@@ -151,12 +154,12 @@ docReady(function(){
 		// aged POs
 		const numericDate = (d) => Math.floor(d.getTime() / (3600*24*1000))
 			
-		if ((numericDate(new Date()) - numericDate(new Date(poDate))) >= daysAged) {
+		if (!ghosted(poNumber) && (numericDate(new Date()) - numericDate(new Date(poDate))) >= daysAged) {
 			thisRow.classList.add('outdated'); agedPO++
 		}
 		
 		// new POs
-		if ((numericDate(new Date()) - numericDate(new Date(poDate))) <= daysNew) {
+		if (!ghosted(poNumber) (numericDate(new Date()) - numericDate(new Date(poDate))) <= daysNew) {
 			thisRow.classList.add('new-this-week'); newPO++
 		}
 	}
@@ -263,7 +266,7 @@ Abraham
 				}
 			}
 		}
-		
+
 		const searchId = poActionLinks()[0].href.split(/[=&]/)[1]
 		const receiveEl = document.createElement('receive')
 		
