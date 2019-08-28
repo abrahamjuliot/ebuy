@@ -69,7 +69,11 @@ const reviewing = `
 	10964802
 	10964982
 	10965054
-	10966165	
+	10966165
+	10976510
+	10971943
+	10971321
+	10971025	
 `
 
 docReady(function(){
@@ -207,8 +211,7 @@ docReady(function(){
             document.body.appendChild(textEl)
             
             const poEmailTemplate = document.getElementById('poEmailTemplate')
-            poEmailTemplate.value = `           
-Status of PO ${digits}
+            poEmailTemplate.value = `Status of PO ${digits}
 Hi ${name}, are all items in this PO received?
 
 PO: ${poNumber}
