@@ -126,7 +126,7 @@ body .content .data-table tr.ready,
     background-color: rgba(226, 247, 244, 0.49) !important;
 }
 
-.highlight-bkm {
+.data-table tr.highlight-bkm {
     background-color: rgba(245, 246, 170, 0.15) !important;
     color: #bb9d65 !important;
 }
