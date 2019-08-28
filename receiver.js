@@ -159,7 +159,7 @@ docReady(function(){
 		}
 		
 		// new POs
-		if (!ghosted(poNumber) (numericDate(new Date()) - numericDate(new Date(poDate))) <= daysNew) {
+		if (!ghosted(poNumber) && (numericDate(new Date()) - numericDate(new Date(poDate))) <= daysNew) {
 			thisRow.classList.add('new-this-week'); newPO++
 		}
 	}
