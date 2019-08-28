@@ -129,11 +129,14 @@ docReady(function(){
 			thisRow.classList.add('ghost'); ghostedPO++
 		}
 		
-		// costly, bkm, and paid POs
+		// bkm
+		if ((new RegExp('bkm|wmk', 'gi')).test(poVendor)) {
+			thisRow.classList.add('highlight-bkm');
+		}
+
+		// costly and paid POs
 		if (!ghosted(poNumber) && amtPrice >= costlyPrice) {
-			let cssClass = 'highlight-costly'
-			if ((new RegExp('bkm|wmk', 'gi')).test(poVendor)) { cssClass = 'highlight-bkm' }
-			poPriceEl.classList.add(cssClass); costlyPO++
+			poPriceEl.classList.add('highlight-costly'); costlyPO++
 		} else if (amtPaid >= (amtPrice*percentRequiredTillPaid)) {
 			poPriceEl.classList.add('highlight-paid')
 			poPaidEl.classList.add('highlight-paid'); paidPO++
