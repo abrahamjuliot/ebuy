@@ -4,6 +4,9 @@ body {
     text-align: center !important;
     font-family: 'Source Code Pro', monospace !important;
 }
+.costly-warning {
+    color: red !important;
+}
 .application_banner .banner-text, div.application_banner {
     display: none !important;
 }

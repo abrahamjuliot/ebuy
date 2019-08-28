@@ -256,7 +256,7 @@ Abraham
 	const firstRowPrice = () => parseFloat(tablePrices[0].innerHTML.substr(1).replace (/,/g, ""))
 	const poActionLinks = () => queryAll(`.data-table a[href*='po_action']`)
 	
-	if (hasTextInURL('po_search') && firstRowPrice() < costlyPrice && poActionLinks().length === 1) {
+	if (hasTextInURL('po_search') && poActionLinks().length === 1) {
 		
 		// on form change, auto set filename and submit
 		const listenOnFormInput = (iframeWindow) => {
@@ -288,7 +288,8 @@ Abraham
 		// then patch the dom
 		patch(
 			document.querySelector('receive'),
-            html`
+			html`
+				${firstRowPrice() >= costlyPrice && `<div class="costly-warning">You are viewing a costly PO: $${costlyPrice}</div>`}
                 <iframe src="https://ebuy.ucr.edu/ebuy/po_action.AttachDocument?nOrderID=${searchId}"></iframe>
                 <iframe style="${ghostStyle}" src="https://ebuy.ucr.edu/ebuy/po_action.MarkPartiallyOKtoPay?nOrderID=${searchId}"></iframe>
 				<iframe src="https://ebuy.ucr.edu/ebuy/po_view.ListAttachments?nOrderID=${searchId}"></iframe>
@@ -300,7 +301,8 @@ Abraham
 		setTimeout(() => {
 			frames[0].window.eval(listenOnFormInput(frames[0].window))
 		}, 5000)
-	} 
+	}
+
 }) // end docReady
 
 }()//end IIF closure
