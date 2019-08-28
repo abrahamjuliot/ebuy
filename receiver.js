@@ -1,5 +1,22 @@
 /*eslint-disable semi */
 !function(){
+
+// url checker
+const hasTextInURL = (x, w = window) => (new RegExp(x, 'gi')).test(w.location.href)
+
+// check before dom loads
+if (hasTextInURL('po_receive') || hasTextInURL('DisplayPrintOptions')) {
+	const listenForPopUp = setInterval(() => {
+		let closed = false
+		if (!closed && (hasTextInURL('po_receive') || hasTextInURL('DisplayPrintOptions'))) {
+			closed = true
+			window.close()
+			clearInterval(listenForPopUp)
+		}
+	}, 100)
+}
+
+
 // 6 line JSX alternative, patch(el, html`<new></new>`)
 const patch = (oldEl, newEl) => oldEl.parentNode.replaceChild(newEl, oldEl)
 const html = (stringSet,...expressionSet) => {
@@ -13,8 +30,8 @@ const docReady = (fn) =>
 	fn(): document.addEventListener('DOMContentLoaded', fn)
 // querySelectorAll
 const queryAll = (x) => document.querySelectorAll(x)
-// url checker
-const hasTextInURL = (x, w = window) => (new RegExp(x, 'gi')).test(w.location.href)
+
+//String manips
 const textToNumber = (x) => parseFloat(x.substr(1).replace(/,/g, ''))
 const toTitleCase = (str) => str
 	.toLowerCase()
@@ -22,6 +39,7 @@ const toTitleCase = (str) => str
 	.map(x => `${x[0].toUpperCase()}${x.substring(1)}`)
 	.join(' ')
 
+// data
 const readyToPay = `
 	flight bank sub getaway stater pizza mission barnes 
 	smart cafe photoshop bbq starbucks restaurant suites
@@ -292,22 +310,4 @@ Abraham
 	} 
 }) // end docReady
 
-// USING Custom Javascript for Websites
-const docLoaded = fn => 
-	document.readyState !== 'loading'?
-        fn(): document.addEventListener('DOMContentLoaded', fn)
-    
-
-if (window.location.href.indexOf('po_receive') > -1) {
-    docLoaded(() => {
-		const listenForPopUp = setInterval(() => {
-		    let closed = false
-		    if (!closed && (window.location.href.indexOf('po_receive') > -1)) {
-		        closed = true
-		        window.close()
-		        clearInterval(listenForPopUp)
-		    }
-		}, 100)
-    })
-}
 }()//end IIF closure
