@@ -1,3 +1,4 @@
+/*eslint-disable semi */
 !function(){
 // 6 line JSX alternative, patch(el, html`<new></new>`)
 const patch = (oldEl, newEl) => oldEl.parentNode.replaceChild(newEl, oldEl)
@@ -15,6 +16,11 @@ const queryAll = (x) => document.querySelectorAll(x)
 // url checker
 const hasTextInURL = (x, w = window) => (new RegExp(x, 'gi')).test(w.location.href)
 const textToNumber = (x) => parseFloat(x.substr(1).replace(/,/g, ''))
+const toTitleCase = (str) => str
+	.toLowerCase()
+	.split(' ')
+	.map(x => `${x[0].toUpperCase()}${x.substring(1)}`)
+	.join(' ')
 
 const readyToPay = `
 	flight bank sub getaway stater pizza mission barnes 
@@ -57,7 +63,8 @@ docReady(function(){
 	const percentRequiredTillPaid = 0.75
 	
 	// banner counters
-	let newPO = paidPO = agedPO = costlyPO = ghostedPO = reviewPO = readyPO = 0
+	let newPO = 0, paidPO = 0, agedPO = 0, 
+	costlyPO = 0 , ghostedPO = 0, reviewPO = 0, readyPO = 0
 	
 	// column presets
     const dateCol = 2
@@ -160,8 +167,8 @@ docReady(function(){
 	const searchInputEl = document.querySelector('.section-box input[value="Search"] ')
     const poDigits = (x) => (x.match(/\d{8}/g) || [''])[0]
     
-	dataTable && dataTable.addEventListener('click', event => {
-		const el = event.target
+	dataTable && dataTable.addEventListener('click', e => {
+		const el = e.target
 		if (el.classList.contains('btn-po-number')) {
 			const text = el.innerHTML
 			const digits = poDigits(text)
@@ -196,7 +203,7 @@ Hi ${name}, are all items in this PO received?
 
 PO: ${poNumber}
 PO Date: ${date}
-Vendor: ${vendor}
+Vendor: ${toTitleCase(vendor)}
 Description: ${description}
 Total: $${poTotal}
 Total Paid (by Accounting): $${totalPaid?totalPaid:0}
