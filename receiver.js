@@ -259,12 +259,11 @@ Abraham
 				chooseFileInputEl.onchange = () => {
 					const filenameText = chooseFileInputEl.value.split(/(\\|\/)/g).pop().split(".")[0]
 					filenameInputEl.value = filenameText // set filename input
-					//form.submit() // auto submit the form
+					form.submit() // auto submit the form
 				}
 			}
 		}
-	
-		const body = document.body
+		
 		const searchId = poActionLinks()[0].href.split(/[=&]/)[1]
 		const receiveEl = document.createElement('receive')
 		
