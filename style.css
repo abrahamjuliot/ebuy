@@ -4,9 +4,7 @@ body {
     text-align: center !important;
     font-family: 'Source Code Pro', monospace !important;
 }
-.costly-warning {
-    color: red !important;
-}
+
 .application_banner .banner-text, div.application_banner {
     display: none !important;
 }
@@ -29,7 +27,15 @@ body {
     background: rgba(246, 170, 170, 0.42) !important;
     color: rgb(189, 105, 105) !important;
 }
-.content .banner-high, .content .highlight-costly {
+
+.costly-warning {
+    width: 82% !important;
+    padding: 50px !important;
+    margin: 0 auto !important;
+    font-size: 1.5rem !important;
+}
+
+.content .banner-high, .content .highlight-costly, .costly-warning {
     background: rgb(232, 175, 199) !important;
     color: #fff !important;
 }

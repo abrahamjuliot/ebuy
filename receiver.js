@@ -289,7 +289,7 @@ Abraham
 		patch(
 			document.querySelector('receive'),
 			html`
-				${firstRowPrice() >= costlyPrice && `<div class="costly-warning">You are viewing a costly PO: $${costlyPrice}</div>`}
+				${firstRowPrice() >= costlyPrice && `<div class="costly-warning">You are viewing a costly PO: $${firstRowPrice()}</div>`}
                 <iframe src="https://ebuy.ucr.edu/ebuy/po_action.AttachDocument?nOrderID=${searchId}"></iframe>
                 <iframe style="${ghostStyle}" src="https://ebuy.ucr.edu/ebuy/po_action.MarkPartiallyOKtoPay?nOrderID=${searchId}"></iframe>
 				<iframe src="https://ebuy.ucr.edu/ebuy/po_view.ListAttachments?nOrderID=${searchId}"></iframe>
