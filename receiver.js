@@ -107,22 +107,6 @@ docReady(function(){
 	// table length
     const len = tablePrices.length
     
-    // Establish Clipboard Notifications
-    // notify
-    const notify = ({poNumber, name, poTotal}) => {
-        let notification
-        if (Notification.permission === 'granted') {
-            notification = new Notification(
-            'eBuy Receiver', {
-                body: `Copied: ${poNumber}, $${poTotal}, ${name}`,
-                icon: 'icon48.png'
-            }
-            )
-            setTimeout(notification.close.bind(notification), 7000)
-        }
-    }
-    
-	
 	// row conditional formatting
 	for (let i = 0; i < len; i++) {
 		const thisRow = rows[i+1]
@@ -234,7 +218,7 @@ Abraham
             poEmailTemplate.select() // select text
             document.execCommand('copy') // copy text
             document.getElementById('poEmailTemplate').outerHTML = '' // destroy element
-            Notification.requestPermission(notify({poNumber, name, poTotal}))	
+			alert(`Copied: ${poNumber}, $${poTotal}, ${name}`)
 		}
     })
     
