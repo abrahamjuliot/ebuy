@@ -1,7 +1,6 @@
-import { toTitleCase } from './helpers.js'
-
-const email = ({ digits, name, poNumber, date, vendor, description, poTotal, totalPaid }) => 
-`Status of PO ${digits}
+const email = ({ digits, name, poNumber, date, vendor, description, poTotal, totalPaid }, helpers) => {
+const { toTitleCase } = helpers
+return `Status of PO ${digits}
 Hi ${name}, are all items in this PO received?
 
 PO: ${poNumber}
@@ -13,5 +12,6 @@ Total Paid (by Accounting): $${totalPaid?totalPaid:0}
 
 Abraham
 `
+}
 
 export default email

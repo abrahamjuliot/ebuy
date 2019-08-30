@@ -39,7 +39,7 @@ const poNumberClick = ({ helpers, columns, email }) => {
             document.body.appendChild(textEl)
             
             const poEmailTemplate = document.getElementById('poEmailTemplate')
-            poEmailTemplate.value = email({digits, name, poNumber, date, vendor, description, poTotal, totalPaid})
+            poEmailTemplate.value = email({digits, name, poNumber, date, vendor, description, poTotal, totalPaid}, helpers)
             poEmailTemplate.select() // select text
             document.execCommand('copy') // copy text
             document.getElementById('poEmailTemplate').outerHTML = '' // destroy element

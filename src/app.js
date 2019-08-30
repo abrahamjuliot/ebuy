@@ -9,6 +9,7 @@ import reviewing from '../data/reviewing.js'
 import presets from './presets.js'
 import rowElements from './rowElements.js'
 import columns from './columns.js'
+import email from './email.js'
 
 // app functions
 import format from './format.js'
@@ -34,7 +35,7 @@ docReady(() => {
 
     format({ readyToPay, reviewing, helpers, presets, rowElements })
     
-    poNumberClick({ helpers, columns })
+    poNumberClick({ helpers, columns, email })
     
     poSearch({ helpers, rowElements, presets })
 

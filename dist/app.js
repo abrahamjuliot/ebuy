@@ -45,6 +45,10 @@ var _columns = require('./columns.js');
 
 var _columns2 = _interopRequireDefault(_columns);
 
+var _email = require('./email.js');
+
+var _email2 = _interopRequireDefault(_email);
+
 var _format = require('./format.js');
 
 var _format2 = _interopRequireDefault(_format);
@@ -59,10 +63,7 @@ var _poSearch2 = _interopRequireDefault(_poSearch);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// app settings
-
-
-// app data
+// app helpers
 var hasTextInURL = _helpers2.default.hasTextInURL,
     docReady = _helpers2.default.docReady;
 
@@ -70,7 +71,12 @@ var hasTextInURL = _helpers2.default.hasTextInURL,
 
 
 // app functions
-// app helpers
+
+
+// app settings
+
+
+// app data
 
 if (hasTextInURL('po_receive') || hasTextInURL('DisplayPrintOptions')) {
 	var listenForPopUp = setInterval(function () {
@@ -88,12 +94,12 @@ docReady(function () {
 
 	(0, _format2.default)({ readyToPay: _readyToPay2.default, reviewing: _reviewing2.default, helpers: _helpers2.default, presets: _presets2.default, rowElements: _rowElements2.default });
 
-	(0, _poNumberClick2.default)({ helpers: _helpers2.default, columns: _columns2.default });
+	(0, _poNumberClick2.default)({ helpers: _helpers2.default, columns: _columns2.default, email: _email2.default });
 
 	(0, _poSearch2.default)({ helpers: _helpers2.default, rowElements: _rowElements2.default, presets: _presets2.default });
 });
 
-},{"../data/readyToPay.js":1,"../data/reviewing.js":2,"./columns.js":4,"./format.js":5,"./helpers.js":6,"./poNumberClick.js":7,"./poSearch.js":8,"./presets.js":9,"./rowElements.js":10}],4:[function(require,module,exports){
+},{"../data/readyToPay.js":1,"../data/reviewing.js":2,"./columns.js":4,"./email.js":5,"./format.js":6,"./helpers.js":7,"./poNumberClick.js":8,"./poSearch.js":9,"./presets.js":10,"./rowElements.js":11}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -112,6 +118,28 @@ columns.totalPaidCol = 9;
 exports.default = columns;
 
 },{}],5:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var email = function email(_ref, helpers) {
+  var digits = _ref.digits,
+      name = _ref.name,
+      poNumber = _ref.poNumber,
+      date = _ref.date,
+      vendor = _ref.vendor,
+      description = _ref.description,
+      poTotal = _ref.poTotal,
+      totalPaid = _ref.totalPaid;
+  var toTitleCase = helpers.toTitleCase;
+
+  return "Status of PO " + digits + "\nHi " + name + ", are all items in this PO received?\n\nPO: " + poNumber + "\nPO Date: " + date + "\nVendor: " + toTitleCase(vendor) + "\nDescription: " + description + "\nTotal: $" + poTotal + "\nTotal Paid (by Accounting): $" + (totalPaid ? totalPaid : 0) + "\n\nAbraham\n";
+};
+
+exports.default = email;
+
+},{}],6:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -244,7 +272,7 @@ var format = function format(_ref) {
 
 exports.default = format;
 
-},{}],6:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -301,7 +329,7 @@ helpers.toTitleCase = function (str) {
 
 exports.default = helpers;
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -360,7 +388,7 @@ var poNumberClick = function poNumberClick(_ref) {
             document.body.appendChild(textEl);
 
             var poEmailTemplate = document.getElementById('poEmailTemplate');
-            poEmailTemplate.value = email({ digits: digits, name: name, poNumber: poNumber, date: date, vendor: vendor, description: description, poTotal: poTotal, totalPaid: totalPaid });
+            poEmailTemplate.value = email({ digits: digits, name: name, poNumber: poNumber, date: date, vendor: vendor, description: description, poTotal: poTotal, totalPaid: totalPaid }, helpers);
             poEmailTemplate.select(); // select text
             document.execCommand('copy'); // copy text
             document.getElementById('poEmailTemplate').outerHTML = ''; // destroy element
@@ -371,7 +399,7 @@ var poNumberClick = function poNumberClick(_ref) {
 
 exports.default = poNumberClick;
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -444,7 +472,7 @@ var poSearch = function poSearch(_ref) {
 
 exports.default = poSearch;
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -459,7 +487,7 @@ presets.percentRequiredTillPaid = 0.75;
 
 exports.default = presets;
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -502,4 +530,4 @@ rowElements.tablePayments = queryAll(tableCol(totalPaidCol));
 
 exports.default = rowElements;
 
-},{"./columns.js":4,"./helpers.js":6}]},{},[3]);
+},{"./columns.js":4,"./helpers.js":7}]},{},[3]);
