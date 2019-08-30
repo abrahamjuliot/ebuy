@@ -4,8 +4,10 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var readyToPay = "\n\tflight bank sub getaway stater pizza mission barnes \n\tsmart cafe photoshop bbq starbucks restaurant suites\n\tinn hospitality coffee tea gra-pow shuttle intermediate\n\tthai lodging lunch restaurants publication llamas\n";
+var readyToPay = {};
 
+readyToPay.travel = "\n\tflight bank mission barnes photoshop suites inn\n\thospitality coffee tea shuttle intermediate lodging\n\tpublication llamas\n";
+readyToPay.food = "\n\tsub getaway stater pizza bbq starbucks restaurant\n\tsmart cafe coffee tea gra-pow thai lunch restaurants\n";
 exports.default = readyToPay;
 
 },{}],2:[function(require,module,exports){
@@ -172,6 +174,8 @@ var format = function format(_ref) {
 	    tableDescriptions = rowElements.tableDescriptions,
 	    tablePrices = rowElements.tablePrices,
 	    tablePayments = rowElements.tablePayments;
+	var travel = readyToPay.travel,
+	    food = readyToPay.food;
 
 	// banner counters
 
@@ -232,7 +236,7 @@ var format = function format(_ref) {
 		};
 
 		// if not ghosted and ready to pay or zero price
-		if (!ghosted(poNumber) && (listToRegExp(readyToPay).test(poVendor) || listToRegExp(readyToPay).test(poDescription) || amtPrice === 0)) {
+		if (!ghosted(poNumber) && (listToRegExp(travel).test(poVendor) || listToRegExp(travel).test(poDescription) || amtPrice % 2 !== 0 && (listToRegExp(food).test(poVendor) || listToRegExp(food).test(poDescription)) || amtPrice === 0)) {
 			thisRow.classList.add('ready');readyPO++;
 		}
 

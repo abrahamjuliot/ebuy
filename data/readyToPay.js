@@ -1,8 +1,12 @@
-const readyToPay = `
-	flight bank sub getaway stater pizza mission barnes 
-	smart cafe photoshop bbq starbucks restaurant suites
-	inn hospitality coffee tea gra-pow shuttle intermediate
-	thai lodging lunch restaurants publication llamas
-`
+const readyToPay = {}
 
+readyToPay.travel = `
+	flight bank mission barnes photoshop suites inn
+	hospitality coffee tea shuttle intermediate lodging
+	publication llamas
+`
+readyToPay.food = `
+	sub getaway stater pizza bbq starbucks restaurant
+	smart cafe coffee tea gra-pow thai lunch restaurants
+`
 export default readyToPay

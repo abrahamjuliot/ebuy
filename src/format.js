@@ -2,6 +2,7 @@ const format = ({ readyToPay, reviewing, helpers, presets, rowElements }) => {
 	const { hasTextInURL, patch, html, queryFirst, textToNumber } = helpers
 	const { daysNew, daysAged, costlyPrice, percentRequiredTillPaid } = presets
 	const { rows, tableDates, tablePOs, tableVendors, tableDescriptions, tablePrices, tablePayments } = rowElements
+	const { travel, food } = readyToPay
 
 	// banner counters
 	let newPO = 0, paidPO = 0, agedPO = 0, costlyPO = 0 , ghostedPO = 0, reviewPO = 0, readyPO = 0
@@ -44,10 +45,13 @@ const format = ({ readyToPay, reviewing, helpers, presets, rowElements }) => {
 		const templateToList = (str) =>
 			str.replace(/\t|\n/gm, ' ').split(' ').filter(x => x) 
 		const listToRegExp = (list) => (new RegExp(templateToList(list).join('|'), 'gi'))
-	
+
 		// if not ghosted and ready to pay or zero price
-		if (!ghosted(poNumber) && (listToRegExp(readyToPay).test(poVendor)
-			|| listToRegExp(readyToPay).test(poDescription) 
+		if (!ghosted(poNumber) 
+			&& (listToRegExp(travel).test(poVendor)
+			|| listToRegExp(travel).test(poDescription) 
+			|| (amtPrice%2 !== 0 && (listToRegExp(food).test(poVendor)
+			|| listToRegExp(food).test(poDescription)))
 			|| amtPrice === 0)) {
 			thisRow.classList.add('ready'); readyPO++
 		}
