@@ -1,31 +1,33 @@
-const helpers = {}
+const helpers = Object.freeze(
+    {
+		// url checker
+		hasTextInURL: (x, w = window) => (new RegExp(x, 'gi')).test(w.location.href),
 
-// url checker
-helpers.hasTextInURL = (x, w = window) => (new RegExp(x, 'gi')).test(w.location.href)
+		// 6 line JSX alternative, patch(el, html`<new></new>`)
+		patch: (oldEl, newEl) => oldEl.parentNode.replaceChild(newEl, oldEl),
+		html: (stringSet,...expressionSet) => {
+		const template = document.createElement('template')
+		template.innerHTML = stringSet.map((str, i) => `${str}${expressionSet[i]||''}`).join('')
+		return template.content
+		},
 
-// 6 line JSX alternative, patch(el, html`<new></new>`)
-helpers.patch = (oldEl, newEl) => oldEl.parentNode.replaceChild(newEl, oldEl)
-helpers.html = (stringSet,...expressionSet) => {
-  const template = document.createElement('template')
-  template.innerHTML = stringSet.map((str, i) => `${str}${expressionSet[i]||''}`).join('')
-  return template.content
-}
+		// dom ready
+		docReady: (fn) => 
+			document.readyState !== 'loading'?
+			fn(): document.addEventListener('DOMContentLoaded', fn),
 
-// dom ready
-helpers.docReady = (fn) => 
-	document.readyState !== 'loading'?
-	fn(): document.addEventListener('DOMContentLoaded', fn)
+		// querySelectors
+		queryAll: (x, el = document) => el.querySelectorAll(x),
+		queryFirst: (x, el = document) => el.querySelector(x),
 
-// querySelectors
-helpers.queryAll = (x, el = document) => el.querySelectorAll(x)
-helpers.queryFirst = (x, el = document) => el.querySelector(x)
-
-//String manips
-helpers.textToNumber = (x) => parseFloat(x.substr(1).replace(/,/g, ''))
-helpers.toTitleCase = (str) => str
-	.toLowerCase()
-	.split(' ')
-	.map(x => `${x[0].toUpperCase()}${x.substring(1)}`)
-    .join(' ')   
+		//String manips
+		textToNumber: (x) => parseFloat(x.substr(1).replace(/,/g, '')),
+		toTitleCase: (str) => str
+			.toLowerCase()
+			.split(' ')
+			.map(x => `${x[0].toUpperCase()}${x.substring(1)}`)
+			.join(' ')
+	}
+) 
 
 export default helpers
