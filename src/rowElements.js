@@ -20,7 +20,4 @@ const rowElements = Object.freeze(
     }
 )
 
-
-
-
 export default rowElements
