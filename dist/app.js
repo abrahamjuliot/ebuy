@@ -4,10 +4,11 @@
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var readyToPay = {};
+var readyToPay = Object.freeze({
+	travel: "\n\t\t\tflight bank mission photoshop suites inn\n\t\t\thospitality shuttle intermediate lodging\n\t\t\tpublication llamas\n\t\t",
+	food: "\n\t\t\tbarnes sub coffee tea getaway stater pizza bbq starbucks restaurant\n\t\t\tsmart cafe coffee tea gra-pow thai lunch restaurants\n\t\t"
+});
 
-readyToPay.travel = "\n\tflight bank mission barnes photoshop suites inn\n\thospitality coffee tea shuttle intermediate lodging\n\tpublication llamas\n";
-readyToPay.food = "\n\tsub getaway stater pizza bbq starbucks restaurant\n\tsmart cafe coffee tea gra-pow thai lunch restaurants\n";
 exports.default = readyToPay;
 
 },{}],2:[function(require,module,exports){
@@ -16,7 +17,7 @@ exports.default = readyToPay;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var reviewing = "\n\t10890351\n\t10928190\n\t10936095\n\t10939286\n\t10946741\n\t10951937\n\t10954269\n\t10955047\n\t10957634\n\t10958450\n\t10958934\n\t10960062\n\t10960342\n\t10961291\n\t10961732\n\t10962348\n\t10963183\n\t10963352\n\t10964802\n\t10964982\n\t10965054\n\t10966165\n\t10976510\n\t10971943\n\t10971321\n\t10971025\n\t10970473\t\n";
+var reviewing = "\n\t10890351\n\t10928190\n\t10936095\n\t10939286\n\t10946741\n\t10951937\n\t10954269\n\t10955047\n\t10957634\n\t10958450\n\t10958934\n\t10960062\n\t10960342\n\t10961291\n\t10961732\n\t10962348\n\t10963183\n\t10963352\n\t10964802\n\t10964982\n\t10965054\n\t10966165\n\t10976510\n\t10971943\n\t10971321\n\t10971025\n\t10970473\n\t10976691\n\t10977001\n\t10975983\n\t10973323\n\t10981780\n";
 
 exports.default = reviewing;
 
@@ -105,17 +106,17 @@ docReady(function () {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-var columns = {};
-
-columns.dateCol = 2;
-columns.nameCol = 3;
-columns.poNumberCol = 4;
-columns.vendorCol = 5;
-columns.descriptionCol = 6;
-columns.poTotalCol = 8;
-columns.totalPaidCol = 9;
+var columns = Object.freeze({
+    dateCol: 2,
+    nameCol: 3,
+    poNumberCol: 4,
+    vendorCol: 5,
+    descriptionCol: 6,
+    poTotalCol: 8,
+    totalPaidCol: 9
+});
 
 exports.default = columns;
 
@@ -280,56 +281,56 @@ exports.default = format;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-	value: true
+		value: true
 });
-var helpers = {};
+var helpers = Object.freeze({
+		// url checker
+		hasTextInURL: function hasTextInURL(x) {
+				var w = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window;
+				return new RegExp(x, 'gi').test(w.location.href);
+		},
 
-// url checker
-helpers.hasTextInURL = function (x) {
-	var w = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : window;
-	return new RegExp(x, 'gi').test(w.location.href);
-};
+		// 6 line JSX alternative, patch(el, html`<new></new>`)
+		patch: function patch(oldEl, newEl) {
+				return oldEl.parentNode.replaceChild(newEl, oldEl);
+		},
+		html: function html(stringSet) {
+				for (var _len = arguments.length, expressionSet = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+						expressionSet[_key - 1] = arguments[_key];
+				}
 
-// 6 line JSX alternative, patch(el, html`<new></new>`)
-helpers.patch = function (oldEl, newEl) {
-	return oldEl.parentNode.replaceChild(newEl, oldEl);
-};
-helpers.html = function (stringSet) {
-	for (var _len = arguments.length, expressionSet = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-		expressionSet[_key - 1] = arguments[_key];
-	}
+				var template = document.createElement('template');
+				template.innerHTML = stringSet.map(function (str, i) {
+						return '' + str + (expressionSet[i] || '');
+				}).join('');
+				return template.content;
+		},
 
-	var template = document.createElement('template');
-	template.innerHTML = stringSet.map(function (str, i) {
-		return '' + str + (expressionSet[i] || '');
-	}).join('');
-	return template.content;
-};
+		// dom ready
+		docReady: function docReady(fn) {
+				return document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
+		},
 
-// dom ready
-helpers.docReady = function (fn) {
-	return document.readyState !== 'loading' ? fn() : document.addEventListener('DOMContentLoaded', fn);
-};
+		// querySelectors
+		queryAll: function queryAll(x) {
+				var el = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+				return el.querySelectorAll(x);
+		},
+		queryFirst: function queryFirst(x) {
+				var el = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
+				return el.querySelector(x);
+		},
 
-// querySelectors
-helpers.queryAll = function (x) {
-	var el = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-	return el.querySelectorAll(x);
-};
-helpers.queryFirst = function (x) {
-	var el = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document;
-	return el.querySelector(x);
-};
-
-//String manips
-helpers.textToNumber = function (x) {
-	return parseFloat(x.substr(1).replace(/,/g, ''));
-};
-helpers.toTitleCase = function (str) {
-	return str.toLowerCase().split(' ').map(function (x) {
-		return '' + x[0].toUpperCase() + x.substring(1);
-	}).join(' ');
-};
+		//String manips
+		textToNumber: function textToNumber(x) {
+				return parseFloat(x.substr(1).replace(/,/g, ''));
+		},
+		toTitleCase: function toTitleCase(str) {
+				return str.toLowerCase().split(' ').map(function (x) {
+						return '' + x[0].toUpperCase() + x.substring(1);
+				}).join(' ');
+		}
+});
 
 exports.default = helpers;
 
@@ -480,14 +481,14 @@ exports.default = poSearch;
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
-var presets = {};
-
-presets.daysNew = 1;
-presets.daysAged = 60;
-presets.costlyPrice = 5000;
-presets.percentRequiredTillPaid = 0.75;
+var presets = Object.freeze({
+    daysNew: 1,
+    daysAged: 60,
+    costlyPrice: 5000,
+    percentRequiredTillPaid: 0.75
+});
 
 exports.default = presets;
 
@@ -495,7 +496,7 @@ exports.default = presets;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-  value: true
+    value: true
 });
 
 var _helpers = require('./helpers.js');
@@ -516,21 +517,22 @@ var dateCol = _columns2.default.dateCol,
     totalPaidCol = _columns2.default.totalPaidCol;
 var queryAll = _helpers2.default.queryAll;
 
-var rowElements = {};
-
 // table column selector
+
 var tableCol = function tableCol(x) {
-  return '.data-table tr td:nth-child(' + x + ')';
+    return '.data-table tr td:nth-child(' + x + ')';
 };
 
-// element collections
-rowElements.rows = queryAll('.data-table tr');
-rowElements.tableDates = queryAll(tableCol(dateCol));
-rowElements.tablePOs = queryAll(tableCol(poNumberCol));
-rowElements.tableVendors = queryAll(tableCol(vendorCol));
-rowElements.tableDescriptions = queryAll(tableCol(descriptionCol));
-rowElements.tablePrices = queryAll(tableCol(poTotalCol));
-rowElements.tablePayments = queryAll(tableCol(totalPaidCol));
+var rowElements = Object.freeze({
+    // element collections
+    rows: queryAll('.data-table tr'),
+    tableDates: queryAll(tableCol(dateCol)),
+    tablePOs: queryAll(tableCol(poNumberCol)),
+    tableVendors: queryAll(tableCol(vendorCol)),
+    tableDescriptions: queryAll(tableCol(descriptionCol)),
+    tablePrices: queryAll(tableCol(poTotalCol)),
+    tablePayments: queryAll(tableCol(totalPaidCol))
+});
 
 exports.default = rowElements;
 
