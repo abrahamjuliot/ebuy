@@ -5,8 +5,8 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 var readyToPay = Object.freeze({
-	travel: "\n\t\t\tflight bank mission photoshop suites inn\n\t\t\thospitality shuttle intermediate lodging\n\t\t\tpublication llamas\n\t\t",
-	food: "\n\t\t\tbarnes sub coffee tea getaway stater pizza bbq starbucks restaurant\n\t\t\tsmart cafe coffee tea gra-pow thai lunch restaurants\n\t\t"
+	travel: "\n\t\t\tflight bank mission photoshop suites inn\n\t\t\thospitality shuttle lodging\n\t\t\tpublication llamas\n\t\t",
+	food: "\n\t\t\tbarnes sub coffee tea getaway stater pizza bbq starbucks restaurant\n\t\t\tsmart cafe coffee tea gra-pow thai lunch restaurants intermediate\n\t\t"
 });
 
 exports.default = readyToPay;
@@ -17,7 +17,7 @@ exports.default = readyToPay;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var reviewing = "\n\t10890351\n\t10928190\n\t10936095\n\t10939286\n\t10946741\n\t10951937\n\t10954269\n\t10955047\n\t10957634\n\t10958450\n\t10958934\n\t10960062\n\t10960342\n\t10961291\n\t10961732\n\t10962348\n\t10963183\n\t10963352\n\t10964802\n\t10964982\n\t10965054\n\t10966165\n\t10976510\n\t10971943\n\t10971321\n\t10971025\n\t10970473\n\t10976691\n\t10977001\n\t10975983\n\t10973323\n\t10981780\n";
+var reviewing = "\n\t10890351\n\t10928190\n\t10936095\n\t10939286\n\t10946741\n\t10951937\n\t10954269\n\t10955047\n\t10957634\n\t10958450\n\t10958934\n\t10960062\n\t10960342\n\t10961291\n\t10961732\n\t10962348\n\t10963183\n\t10963352\n\t10964802\n\t10964982\n\t10965054\n\t10966165\n\t10976510\n\t10971943\n\t10971321\n\t10971025\n\t10970473\n\t10976691\n\t10977001\n\t10975983\n\t10973323\n\t10981780\n\t10976855\n\t10968622\n\t10977536\n\t10971831\n\t10971803\n\t10975643\n";
 
 exports.default = reviewing;
 
@@ -237,7 +237,7 @@ var format = function format(_ref) {
 		};
 
 		// if not ghosted and ready to pay or zero price
-		if (!ghosted(poNumber) && (listToRegExp(travel).test(poVendor) || listToRegExp(travel).test(poDescription) || amtPrice % 2 !== 0 && (listToRegExp(food).test(poVendor) || listToRegExp(food).test(poDescription)) || amtPrice === 0)) {
+		if (!ghosted(poNumber) && (listToRegExp(travel).test(poVendor) || listToRegExp(travel).test(poDescription) || amtPrice % 1 !== 0 && (listToRegExp(food).test(poVendor) || listToRegExp(food).test(poDescription)) || amtPrice === 0)) {
 			thisRow.classList.add('ready');readyPO++;
 		}
 
