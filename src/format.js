@@ -50,7 +50,7 @@ const format = ({ readyToPay, reviewing, helpers, presets, rowElements }) => {
 		if (!ghosted(poNumber) 
 			&& (listToRegExp(travel).test(poVendor)
 			|| listToRegExp(travel).test(poDescription) 
-			|| (amtPrice%1 !== 0 && (listToRegExp(food).test(poVendor)
+			|| ((listToRegExp(food).test(poVendor)  // removed condition: amtPrice%1 !== 0
 			|| listToRegExp(food).test(poDescription)))
 			|| amtPrice === 0)) {
 			thisRow.classList.add('ready'); readyPO++

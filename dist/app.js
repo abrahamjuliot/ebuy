@@ -17,7 +17,7 @@ exports.default = readyToPay;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var reviewing = "\n\t10890351\n\t10928190\n\t10936095\n\t10939286\n\t10946741\n\t10951937\n\t10954269\n\t10955047\n\t10957634\n\t10958450\n\t10958934\n\t10960062\n\t10960342\n\t10961291\n\t10961732\n\t10962348\n\t10963183\n\t10963352\n\t10964802\n\t10964982\n\t10965054\n\t10966165\n\t10976510\n\t10971943\n\t10971321\n\t10971025\n\t10970473\n\t10976691\n\t10977001\n\t10975983\n\t10973323\n\t10981780\n\t10976855\n\t10968622\n\t10977536\n\t10971831\n\t10971803\n\t10975643\n\t10983365\n";
+var reviewing = "\n\t10890351\n\t10928190\n\t10936095\n\t10939286\n\t10946741\n\t10951937\n\t10954269\n\t10955047\n\t10957634\n\t10958450\n\t10958934\n\t10960062\n\t10960342\n\t10961291\n\t10961732\n\t10962348\n\t10963183\n\t10963352\n\t10964802\n\t10964982\n\t10965054\n\t10966165\n\t10976510\n\t10971943\n\t10971321\n\t10971025\n\t10970473\n\t10976691\n\t10977001\n\t10975983\n\t10973323\n\t10981780\n\t10976855\n\t10968622\n\t10977536\n\t10971831\n\t10971803\n\t10975643\n\t10983365\n\t10971949\n\t10976404\n\t10976403\n\t10976847\n\t10977236\n\t10977462\n\t10979307\n\t10979554\n\t10980512\n\t10980703\n\t10981674\n\t10982036\n\t10984336\n\t10983632\n\t10984329\n\t10985420\n\t10985670\n\t10984858\n\t10985448\n\t10988098\n\t10985747\n\t10985526\n\t10986081\n\t10986026\n\t10988023\n\t10989441\n\t10989409\n\t10990246\n\t10990244\n\t10992502\n\t10992505\n\t10993574\n";
 
 exports.default = reviewing;
 
@@ -237,7 +237,8 @@ var format = function format(_ref) {
 		};
 
 		// if not ghosted and ready to pay or zero price
-		if (!ghosted(poNumber) && (listToRegExp(travel).test(poVendor) || listToRegExp(travel).test(poDescription) || amtPrice % 1 !== 0 && (listToRegExp(food).test(poVendor) || listToRegExp(food).test(poDescription)) || amtPrice === 0)) {
+		if (!ghosted(poNumber) && (listToRegExp(travel).test(poVendor) || listToRegExp(travel).test(poDescription) || listToRegExp(food).test(poVendor) // removed condition: amtPrice%1 !== 0
+		|| listToRegExp(food).test(poDescription) || amtPrice === 0)) {
 			thisRow.classList.add('ready');readyPO++;
 		}
 
@@ -411,7 +412,9 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 
-var _templateObject = _taggedTemplateLiteral(['\n                ', '\n                <iframe src="https://ebuy.ucr.edu/ebuy/po_action.AttachDocument?nOrderID=', '"></iframe>\n                <iframe style="', '" src="https://ebuy.ucr.edu/ebuy/po_action.MarkPartiallyOKtoPay?nOrderID=', '"></iframe>\n                <iframe src="https://ebuy.ucr.edu/ebuy/po_view.ListAttachments?nOrderID=', '"></iframe>\n                <iframe src="https://ebuy.ucr.edu/ebuy/po_receive.DisplayReceivePartial?nOrderID=', '"></iframe>\n            '], ['\n                ', '\n                <iframe src="https://ebuy.ucr.edu/ebuy/po_action.AttachDocument?nOrderID=', '"></iframe>\n                <iframe style="', '" src="https://ebuy.ucr.edu/ebuy/po_action.MarkPartiallyOKtoPay?nOrderID=', '"></iframe>\n                <iframe src="https://ebuy.ucr.edu/ebuy/po_view.ListAttachments?nOrderID=', '"></iframe>\n                <iframe src="https://ebuy.ucr.edu/ebuy/po_receive.DisplayReceivePartial?nOrderID=', '"></iframe>\n            ']);
+var _templateObject = _taggedTemplateLiteral(['\n                ', '\n                <iframe src="https://ebuy.ucr.edu/ebuy/po_action.AttachDocument?nOrderID=', '"></iframe>\n            '], ['\n                ', '\n                <iframe src="https://ebuy.ucr.edu/ebuy/po_action.AttachDocument?nOrderID=', '"></iframe>\n            ']),
+    _templateObject2 = _taggedTemplateLiteral(['\n                    <iframe style="', '" src="https://ebuy.ucr.edu/ebuy/po_action.MarkPartiallyOKtoPay?nOrderID=', '"></iframe>\n                    <iframe src="https://ebuy.ucr.edu/ebuy/po_view.ListAttachments?nOrderID=', '"></iframe>\n                '], ['\n                    <iframe style="', '" src="https://ebuy.ucr.edu/ebuy/po_action.MarkPartiallyOKtoPay?nOrderID=', '"></iframe>\n                    <iframe src="https://ebuy.ucr.edu/ebuy/po_view.ListAttachments?nOrderID=', '"></iframe>\n                ']),
+    _templateObject3 = _taggedTemplateLiteral(['\n                    <iframe src="https://ebuy.ucr.edu/ebuy/po_receive.DisplayReceivePartial?nOrderID=', '"></iframe>\n                '], ['\n                    <iframe src="https://ebuy.ucr.edu/ebuy/po_receive.DisplayReceivePartial?nOrderID=', '"></iframe>\n                ']);
 
 function _taggedTemplateLiteral(strings, raw) { return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -433,7 +436,7 @@ var poSearch = function poSearch(_ref) {
     };
     var poActionLinks = function poActionLinks() {
         return queryAll('.data-table a[href*=\'po_action\']');
-    }; // usd to retrieve PO id
+    }; // used to retrieve PO id
 
     if (hasTextInURL('po_search') && poActionLinks().length === 1) {
 
@@ -458,15 +461,29 @@ var poSearch = function poSearch(_ref) {
         };
 
         var searchId = poActionLinks()[0].href.split(/[=&]/)[1];
+
+        var attachmentEl = document.createElement('attachment');
+        var attachmentListEl = document.createElement('attachmentList');
         var receiveEl = document.createElement('receive');
 
+        document.body.appendChild(attachmentEl);
+        document.body.appendChild(attachmentListEl);
         document.body.appendChild(receiveEl);
 
         // declare ghost style for iframe (frame required to get ok to pay data)
         var ghostStyle = 'height:0;margin:0!important;padding:0!important;min-height:0!important;';
 
         // then patch the dom
-        patch(queryFirst('receive'), html(_templateObject, firstRowPrice() >= costlyPrice && '<div class="costly-warning">You are viewing a costly PO: $' + firstRowPrice() + '</div>', searchId, ghostStyle, searchId, searchId, searchId));
+        patch(queryFirst('attachment'), html(_templateObject, firstRowPrice() >= costlyPrice && '<div class="costly-warning">You are viewing a costly PO: $' + firstRowPrice() + '</div>', searchId));
+
+        // delay is required to obtain the OrderID
+        setTimeout(function () {
+            patch(queryFirst('attachmentList'), html(_templateObject2, ghostStyle, searchId, searchId));
+        }, 1000);
+
+        setTimeout(function () {
+            patch(queryFirst('receive'), html(_templateObject3, searchId));
+        }, 2000);
 
         // then listen for form input on upload iframe
         setTimeout(function () {
