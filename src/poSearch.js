@@ -60,7 +60,7 @@ const poSearch = ({ helpers, rowElements, presets }) => {
                     <iframe src="https://ebuy.ucr.edu/ebuy/po_view.ListAttachments?nOrderID=${searchId}"></iframe>
                 `
             )
-        }, 1000)
+        }, 700)
 
         setTimeout(() => {
             patch(
@@ -69,7 +69,7 @@ const poSearch = ({ helpers, rowElements, presets }) => {
                     <iframe src="https://ebuy.ucr.edu/ebuy/po_receive.DisplayReceivePartial?nOrderID=${searchId}"></iframe>
                 `
             )
-        }, 2000)
+        }, 1400)
 
         // then listen for form input on upload iframe
         setTimeout(() => {

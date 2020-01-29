@@ -18,11 +18,11 @@ import poSearch from './poSearch.js'
 
 const { hasTextInURL, docReady } = helpers
 
-// check before doc ready
-if (hasTextInURL('po_receive') || hasTextInURL('DisplayPrintOptions')) {
+// check before doc ready 
+if (hasTextInURL('Popup') || hasTextInURL('DisplayPrintOptions')) {
 	const listenForPopUp = setInterval(() => {
 		let closed = false
-		if (!closed && (hasTextInURL('po_receive') || hasTextInURL('DisplayPrintOptions'))) {
+		if (!closed && (hasTextInURL('Popup') || hasTextInURL('DisplayPrintOptions'))) {
 			closed = true
 			window.close()
 			clearInterval(listenForPopUp)

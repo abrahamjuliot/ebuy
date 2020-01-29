@@ -17,7 +17,7 @@ exports.default = readyToPay;
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-var reviewing = "\n\t10890351\n\t10928190\n\t10936095\n\t10939286\n\t10946741\n\t10951937\n\t10954269\n\t10955047\n\t10957634\n\t10958450\n\t10958934\n\t10960062\n\t10960342\n\t10961291\n\t10961732\n\t10962348\n\t10963183\n\t10963352\n\t10964802\n\t10964982\n\t10965054\n\t10966165\n\t10976510\n\t10971943\n\t10971321\n\t10971025\n\t10970473\n\t10976691\n\t10977001\n\t10975983\n\t10973323\n\t10981780\n\t10976855\n\t10968622\n\t10977536\n\t10971831\n\t10971803\n\t10975643\n\t10983365\n\t10971949\n\t10976404\n\t10976403\n\t10976847\n\t10977236\n\t10977462\n\t10979307\n\t10979554\n\t10980512\n\t10980703\n\t10981674\n\t10982036\n\t10984336\n\t10983632\n\t10984329\n\t10985420\n\t10985670\n\t10984858\n\t10985448\n\t10988098\n\t10985747\n\t10985526\n\t10986081\n\t10986026\n\t10988023\n\t10989441\n\t10989409\n\t10990246\n\t10990244\n\t10992502\n\t10992505\n\t10993574\n";
+var reviewing = "\n\t10890351\n\t10928190\n\t10936095\n\t10939286\n\t10946741\n\t10951937\n\t10954269\n\t10955047\n\t10957634\n\t10958450\n\t10958934\n\t10960062\n\t10960342\n\t10961291\n\t10961732\n\t10962348\n\t10963183\n\t10963352\n\t10964802\n\t10964982\n\t10965054\n\t10966165\n\t10976510\n\t10971943\n\t10971321\n\t10971025\n\t10970473\n\t10976691\n\t10977001\n\t10975983\n\t10973323\n\t10981780\n\t10976855\n\t10968622\n\t10977536\n\t10971831\n\t10971803\n\t10975643\n\t10983365\n\t10971949\n\t10976404\n\t10976403\n\t10976847\n\t10977236\n\t10977462\n\t10979307\n\t10979554\n\t10980512\n\t10980703\n\t10981674\n\t10982036\n\t10984336\n\t10983632\n\t10984329\n\t10985420\n\t10985670\n\t10984858\n\t10985448\n\t10988098\n\t10985747\n\t10985526\n\t10986081\n\t10986026\n\t10988023\n\t10989441\n\t10989409\n\t10990246\n\t10990244\n\t10992502\n\t10992505\n\t10993574\n\t10989949\n\t10991294\n\t10991910\n\t10993272\n\t10994472\n\t10995187\n\t10994895\n  10995318\n  10987077\n  11004635\n  11004632\n  10998760\n  10985448\n  11004759\n  10998284\n  10999530\n  11000096\n  11000123\n  11001578\n  11001772\n  11003790\n  11004640\n  11004310\n  11003156\n  11004782\n  11006052\n  11006153\n  11006909\n  11007231\n  11007883\n  11008641\n";
 
 exports.default = reviewing;
 
@@ -70,7 +70,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var hasTextInURL = _helpers2.default.hasTextInURL,
     docReady = _helpers2.default.docReady;
 
-// check before doc ready
+// check before doc ready 
 
 
 // app functions
@@ -81,10 +81,10 @@ var hasTextInURL = _helpers2.default.hasTextInURL,
 
 // app data
 
-if (hasTextInURL('po_receive') || hasTextInURL('DisplayPrintOptions')) {
+if (hasTextInURL('Popup') || hasTextInURL('DisplayPrintOptions')) {
 	var listenForPopUp = setInterval(function () {
 		var closed = false;
-		if (!closed && (hasTextInURL('po_receive') || hasTextInURL('DisplayPrintOptions'))) {
+		if (!closed && (hasTextInURL('Popup') || hasTextInURL('DisplayPrintOptions'))) {
 			closed = true;
 			window.close();
 			clearInterval(listenForPopUp);
@@ -479,11 +479,11 @@ var poSearch = function poSearch(_ref) {
         // delay is required to obtain the OrderID
         setTimeout(function () {
             patch(queryFirst('attachmentList'), html(_templateObject2, ghostStyle, searchId, searchId));
-        }, 1000);
+        }, 700);
 
         setTimeout(function () {
             patch(queryFirst('receive'), html(_templateObject3, searchId));
-        }, 2000);
+        }, 1400);
 
         // then listen for form input on upload iframe
         setTimeout(function () {
